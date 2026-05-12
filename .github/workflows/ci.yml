@@ -44,7 +44,7 @@ jobs:
 
       - name: 3. Test coverage
         run: npm run test:coverage
-  
+
   build-development:
     name: Build for development
     runs-on: ubuntu-latest
