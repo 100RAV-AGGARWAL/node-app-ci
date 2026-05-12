@@ -16,7 +16,8 @@
     "prepare": "husky",
     "start": "cross-env DOTENV_CONFIG_PATH=./config/.env.production node -r dotenv/config ./dist/main.js",
     "test": "cross-env NODE_ENV=test vitest",
-    "type-check": "tsc -b --noEmit"
+    "type-check": "tsc -b --noEmit",
+    "test:coverage": "cross-env NODE_ENV=test vitest run --coverage"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -61,7 +62,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5"
   },
   "type": "module",
   "lint-staged": {

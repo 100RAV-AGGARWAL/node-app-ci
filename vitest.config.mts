@@ -9,6 +9,13 @@ const config = defineConfig({
     env: {
       DOTENV_CONFIG_PATH: 'config/.env.test',
     },
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      reportsDirectory: './coverage',
+      include: ['src/**/*.ts'],
+      exclude: ['src/main.ts'],
+    },
   },
 });
 
