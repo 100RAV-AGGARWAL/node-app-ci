@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Format, lint, and test coverage
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      HUSKY: 0
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: 1. Format check
+        run: npm run format:check
+
+      - name: 2. Lint check
+        run: npm run lint
+
+      - name: 3. Test coverage
+        run: npm run test:coverage
