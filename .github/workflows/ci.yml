@@ -44,3 +44,31 @@ jobs:
 
       - name: 3. Test coverage
         run: npm run test:coverage
+  
+  build-development:
+    name: Build for development
+    runs-on: ubuntu-latest
+    needs: checks
+    if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request'
+    environment: development
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create development env file
+        env:
+          GITHUB_VARS_JSON: ${{ toJson(vars) }}
+        run: npm run env:create:dev
+
+      - name: Build
+        run: npm run build
