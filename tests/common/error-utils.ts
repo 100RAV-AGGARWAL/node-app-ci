@@ -8,7 +8,7 @@ import { type ParseError, parseJson } from 'jet-validators/utils';
 type ValidationError = {
   message: string;
   errors: ParseError[];
-}
+};
 
 /******************************************************************************
                                 Functions

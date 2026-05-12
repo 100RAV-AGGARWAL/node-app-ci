@@ -5,9 +5,8 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-  // global ignores
-  globalIgnores(['**/dist/**', '**/public/**/lib/**']),
-  // linting rules (code quality only)
+  globalIgnores(['**/dist/**', '**/coverage/**', '**/node_modules/**']),
+
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -24,7 +23,6 @@ export default defineConfig([
       n,
     },
     rules: {
-      // code quality / correctness
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -37,10 +35,9 @@ export default defineConfig([
       'no-console': 'warn',
       'no-extra-boolean-cast': 'off',
       'no-process-env': 'warn',
-      // node correctness
-      'n/no-extraneous-import': 'error'
+      'n/no-extraneous-import': 'error',
     },
   },
-  // MUST be last — disables ALL formatting rules
+
   eslintConfigPrettier,
 ]);

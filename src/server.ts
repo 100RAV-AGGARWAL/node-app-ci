@@ -1,22 +1,22 @@
-import express, { type NextFunction, type Request, type Response } from 'express';
+import express, {
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
 import helmet from 'helmet';
 import logger from 'jet-logger';
 import morgan from 'morgan';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import swaggerUi from 'swagger-ui-express';
 
+import EnvVars, { NodeEnvs } from './common/constants/env.js';
 import Paths from './common/constants/Paths.js';
 import { RouteError } from './common/utils/route-errors.js';
 import BaseRouter from './routes/apiRouter.js';
-
-import EnvVars, { NodeEnvs } from './common/constants/env.js';
+import swaggerSpec from './swagger.js';
 
 /******************************************************************************
                                 Setup
 ******************************************************************************/
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -33,8 +33,30 @@ if (EnvVars.NodeEnv === NodeEnvs.DEV) {
 
 // Security
 if (EnvVars.NodeEnv === NodeEnvs.PRODUCTION) {
-  app.use(helmet());
+  app.use(helmet({ contentSecurityPolicy: false }));
 }
+
+// Health check
+app.get('/', (_: Request, res: Response) => {
+  return res.status(200).json({ status: 'ok', docs: '/api-docs' });
+});
+
+app.get('/health', (_: Request, res: Response) => {
+  return res.status(200).json({ status: 'ok' });
+});
+
+// Swagger docs
+app.get('/api-docs.json', (_: Request, res: Response) => {
+  return res.status(200).json(swaggerSpec);
+});
+
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
+    customSiteTitle: 'Lilly Scout API Docs',
+  }),
+);
 
 // Add APIs, must be after middleware
 app.use(Paths._, BaseRouter);
@@ -48,26 +70,6 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
     return res.status(err.status).json({ error: err.message });
   }
   return next(err);
-});
-
-// **** FrontEnd Content **** //
-
-// Set views directory (html)
-const viewsDir = path.join(__dirname, 'views');
-app.set('views', viewsDir);
-
-// Set static directory (js and css).
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
-
-// Nav to users pg by default
-app.get('/', (_: Request, res: Response) => {
-  return res.redirect('/users');
-});
-
-// Redirect to login if not logged in.
-app.get('/users', (_: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
 });
 
 /******************************************************************************

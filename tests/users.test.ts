@@ -3,12 +3,11 @@ import { JetPaths as Paths } from '../src/common/constants/Paths.js';
 import { ValidationError } from '../src/common/utils/route-errors.js';
 import User, { type IUser } from '../src/models/User.model.js';
 import UserRepo from '../src/repos/UserRepo.js';
-
-import { agent } from './support/agent.js';
-import type { TestRes } from './common/supertest-types.js';
-import { parseValidationError } from './common/error-utils.js';
 import UserService from '../src/services/UserService.js';
 import { compareUserArrays } from './common/comparators.js';
+import { parseValidationError } from './common/error-utils.js';
+import type { TestRes } from './common/supertest-types.js';
+import { agent } from './support/agent.js';
 
 /******************************************************************************
                                Constants
@@ -42,7 +41,9 @@ describe('UserRouter', () => {
       'should return a JSON object with all the users and a status code of ' +
         `"${OK}" if the request was successful.`,
       async () => {
-        const res: TestRes<{ users: IUser[] }> = await agent.get(Paths.Users.Get());
+        const res: TestRes<{ users: IUser[] }> = await agent.get(
+          Paths.Users.Get(),
+        );
         expect(res.status).toBe(OK);
         expect(compareUserArrays(res.body.users, DUMMY_USERS)).toBeTruthy();
       },
@@ -89,7 +90,9 @@ describe('UserRouter', () => {
       async () => {
         const user = User.new();
         user.id = '5' as unknown as number;
-        const res: TestRes = await agent.put(Paths.Users.Update()).send({ user });
+        const res: TestRes = await agent
+          .put(Paths.Users.Update())
+          .send({ user });
         expect(res.status).toBe(BAD_REQUEST);
         const errorObj = parseValidationError(res.body.error);
         expect(errorObj.message).toBe(ValidationError.MESSAGE);

@@ -1,6 +1,5 @@
 import { getRandomInt } from '../common/utils/number-utils.js';
 import type { IUser } from '../models/User.model.js';
-
 import orm from './MockOrm.js';
 
 /******************************************************************************

@@ -3,19 +3,14 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": [
-      "ES2022"
-    ],
+    "lib": ["ES2022"],
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": false,
-    "types": [
-      "node",
-      "vitest/globals"
-    ],
+    "types": ["node", "vitest/globals"],
     "rootDir": "."
   },
   "ts-node": {
@@ -28,8 +23,5 @@
     "scripts",
     "eslint.config.ts",
     "vitest.config.mts"
-  ],
-  "exclude": [
-    "src/public/*"
   ]
 }

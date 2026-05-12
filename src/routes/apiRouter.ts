@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import Paths from '../common/constants/Paths.js';
-
 import UserRoutes from './UserRoutes.js';
 
 /******************************************************************************

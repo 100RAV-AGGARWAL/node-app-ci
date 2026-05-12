@@ -2,7 +2,6 @@ import { isNonEmptyString, isString, isUnsignedInteger } from 'jet-validators';
 import { parseObject, type Schema, testObject } from 'jet-validators/utils';
 
 import { transformIsDate } from '../common/utils/validators.js';
-
 import type { Entity } from './common/types.js';
 
 /******************************************************************************

@@ -4,7 +4,6 @@ import { transform } from 'jet-validators/utils';
 import HttpStatusCodes from '../common/constants/HttpStatusCodes.js';
 import User from '../models/User.model.js';
 import UserService from '../services/UserService.js';
-
 import type { Req, Res } from './common/express-types.js';
 import parseReq from './common/parseReq.js';
 

@@ -4,19 +4,9 @@
     "outDir": "dist",
     "sourceMap": false,
     "removeComments": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "rootDir": "./src"
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "tests",
-    "src/public/",
-    "scripts",
-    "eslint.config.ts",
-    "vitest.config.mts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["tests", "scripts", "eslint.config.ts", "vitest.config.mts"]
 }
