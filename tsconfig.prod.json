@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": false,
+    "removeComments": true,
+    "types": [
+      "node"
+    ],
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "tests",
+    "src/public/",
+    "scripts",
+    "eslint.config.ts",
+    "vitest.config.mts"
+  ]
+}
