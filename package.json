@@ -17,7 +17,10 @@
     "start": "cross-env DOTENV_CONFIG_PATH=./config/.env.production node -r dotenv/config ./dist/main.js",
     "test": "cross-env NODE_ENV=test vitest",
     "type-check": "tsc -b --noEmit",
-    "test:coverage": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=./config/.env.test vitest run --coverage"
+    "test:coverage": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=./config/.env.test vitest run --coverage",
+    "env:create:dev": "node scripts/create-env-file.mjs development",
+    "env:create:test": "node scripts/create-env-file.mjs test",
+    "env:create:prod": "node scripts/create-env-file.mjs production"
   },
   "engines": {
     "node": ">=20.0.0"

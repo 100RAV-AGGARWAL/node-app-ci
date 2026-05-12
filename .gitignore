@@ -144,4 +144,4 @@ vite.config.ts.timestamp-*
 
 coverage/
 
-**/database.test.json
+src/repos/common/database.test.json
