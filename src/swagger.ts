@@ -1,7 +1,7 @@
 const swaggerSpec = {
   openapi: '3.0.3',
   info: {
-    title: 'Lilly Scout API',
+    title: 'Lilly Scout API demo',
     version: '1.0.0',
     description: 'Server-only REST API documentation for Lilly Scout.',
   },
